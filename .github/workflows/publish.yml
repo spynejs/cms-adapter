@@ -1,0 +1,29 @@
+name: Publish cms-adapter
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  id-token: write    # REQUIRED for npm trusted publishing
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish to npm (OIDC)
+        run: npm publish --provenance
