@@ -1,0 +1,115 @@
+@use "../globals" as globals;
+@use "../palette" as palette;
+
+#snapshot-section {
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  padding: 0 2rem 140px 2rem;
+
+
+  .snapshot-container {
+    position: relative;
+    width: 100%;
+    min-height: 260px;
+    border-radius: 9px;
+    box-shadow: 7px 7px 8px rgba(122, 119, 119, 0.18);
+    background: palette.$Neutral-900;
+    margin:1rem 0;
+    padding: 1rem 2rem 2rem 2rem;
+
+    button.snapshot-submit-btn{
+      &.disable-btn{
+        pointer-events: none;
+        opacity: .4;
+      }
+
+    }
+
+
+    .snapshot-label{
+      position: relative;
+      margin:1rem 0;
+      span{
+        color: palette.$Neutral-300;
+        font-size: .75rem;
+        display: block;
+        text-transform: uppercase;
+
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        color: palette.$Primary-100;
+        line-height: 100%;
+      }
+    }
+
+
+    .snapshots-list{
+        position: relative;
+        width: 100%;
+
+      ul{
+        position: relative;
+        width: 100%;
+
+        li{
+          position: relative;
+          width: 100%;
+          display: grid;
+          grid-template-columns: max-content 100px 5.5ch;
+
+          &.titles{
+            text-transform: uppercase;
+            font-size: .74rem;
+
+
+            p.title-1{
+              width: 43.5ch;
+            }
+            p{
+              color: palette.$Neutral-300;
+              font-family: "Cousine", monospace;
+
+            }
+
+          }
+
+          a,p{
+
+            font-family: "Cousine", monospace;
+          }
+
+          a{
+            color: palette.$Primary-200;
+            padding-right: 3ch;
+          }
+
+          p{
+            color: palette.$Neutral-300;
+          }
+
+
+
+
+        }
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+  }
+
+}

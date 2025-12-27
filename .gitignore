@@ -1,0 +1,17 @@
+*.DS_Store
+.idea
+node_modules
+node_modules/*
+admin
+app/*
+!app/.gitkeep
+dist/*
+!dist/.gitkeep
+lib
+!lib/spyne-plugin*.js
+# Ignore snapshot contents
+server/.snapshots/*
+
+# But keep the directory and placeholder
+!server/.snapshots/
+!server/.snapshots/.gitkeep

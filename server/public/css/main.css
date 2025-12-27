@@ -1,0 +1,157 @@
+#spyne-cms-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1100;
+}
+
+#spyne-cms-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 46px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#spyne-cms-header .header-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#spyne-cms-header .header-content .links a {
+  color: #98AEEB;
+  font-size: 1.25rem;
+  pointer-events: all;
+  cursor: pointer;
+}
+#spyne-cms-header .header-content .links a:hover {
+  color: #E0E8F9;
+}
+#spyne-cms-header .header-content h1 {
+  font-family: "Jura", sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: #9AA5B1;
+}
+#spyne-cms-header .header-content p {
+  color: #F5F7FA;
+  font-size: 1.25rem;
+}
+
+#snapshot-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  padding: 0 2rem 140px 2rem;
+}
+#snapshot-section .snapshot-container {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 9px;
+  box-shadow: 7px 7px 8px rgba(122, 119, 119, 0.18);
+  background: #1F2933;
+  margin: 1rem 0;
+  padding: 1rem 2rem 2rem 2rem;
+}
+#snapshot-section .snapshot-container button.snapshot-submit-btn.disable-btn {
+  pointer-events: none;
+  opacity: 0.4;
+}
+#snapshot-section .snapshot-container .snapshot-label {
+  position: relative;
+  margin: 1rem 0;
+}
+#snapshot-section .snapshot-container .snapshot-label span {
+  color: #9AA5B1;
+  font-size: 0.75rem;
+  display: block;
+  text-transform: uppercase;
+}
+#snapshot-section .snapshot-container .snapshot-label h3 {
+  font-size: 1.2rem;
+  color: #BED0F7;
+  line-height: 100%;
+}
+#snapshot-section .snapshot-container .snapshots-list {
+  position: relative;
+  width: 100%;
+}
+#snapshot-section .snapshot-container .snapshots-list ul {
+  position: relative;
+  width: 100%;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content 100px 5.5ch;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li.titles {
+  text-transform: uppercase;
+  font-size: 0.74rem;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li.titles p.title-1 {
+  width: 43.5ch;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li.titles p {
+  color: #9AA5B1;
+  font-family: "Cousine", monospace;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li a, #snapshot-section .snapshot-container .snapshots-list ul li p {
+  font-family: "Cousine", monospace;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li a {
+  color: #98AEEB;
+  padding-right: 3ch;
+}
+#snapshot-section .snapshot-container .snapshots-list ul li p {
+  color: #9AA5B1;
+}
+
+body main #spyne-cms-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+body main #spyne-cms-body h2 {
+  font-size: 1.2rem;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #9AA5B1;
+  font-family: "Nunito", sans-serif;
+}
+body main#spyne-cms-main {
+  position: relative;
+  margin-top: 46px;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.25rem;
+  max-width: 1280px;
+  min-height: calc(100vh - 46px);
+  background: #E4E7EB;
+}
+
+/*# sourceMappingURL=main.css.map */

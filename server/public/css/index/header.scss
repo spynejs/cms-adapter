@@ -1,0 +1,57 @@
+@use "../globals" as globals;
+@use "../palette" as palette;
+
+#spyne-cms-header{
+  position:  absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 46px;
+  background: palette.$Neutral-1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: globals.$mainMaxWidth;
+    padding:0 .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .links a{
+      color: palette.$Primary-200;
+      font-size: 1.25rem;
+      pointer-events: all;
+      cursor: pointer;
+
+      &:hover{
+        color: palette.$Primary-050;
+      }
+    }
+
+
+    h1{
+      font-family : "Jura", sans-serif;
+      font-weight : bold;
+      font-size : 30px;
+     // color : #62B0E8;
+      //color : rgb(98, 176, 232);
+      color : #9AA5B1;
+    }
+
+    p{
+      color: palette.$Neutral-050;
+      font-size: 1.25rem;
+
+    }
+
+
+  }
+
+
+}

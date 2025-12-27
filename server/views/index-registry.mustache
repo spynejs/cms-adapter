@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spyne App Registry</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@200;300;400;500;600;700&display=swap"
+            rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/tailwind.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script defer src="/js/snapshot-container-el.js"></script>
+    <script defer src="/js/index.js"></script>
+</head>
+<body>
+<main id="spyne-cms-main">
+    <div id="spyne-cms-ui">
+        <div id="spyne-cms-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>SPYNE</h1>
+                </div>
+                <div class="links">
+                    <p>Spyne App Registry</p>
+                </div>
+            </div>
+        </div>
+        <!-- end header -->
+    </div>
+
+    <section id="spyne-cms-body">
+        <h2 class="text-xl font-semibold mb-6 text-gray-700">SpyneJS Application Dashboard</h2>
+
+        <!-- 🧠 User Information Section -->
+
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h3 class="font-semibold text-lg text-blue-700 mb-4">Authenticated User</h3>
+
+            {{#hasUser}}
+                <div class="space-y-2">
+                    <p><span class="font-medium text-gray-600">Name:</span> {{user.name}}</p>
+                    <p><span class="font-medium text-gray-600">Email:</span> {{user.email}}</p>
+                    <p><span class="font-medium text-gray-600">Picture:</span> <img src="{{user.picture}}" alt=""/></p>
+                    <p><span class="font-medium text-gray-600">Role:</span>
+                        <span class="px-2 py-1 rounded-full text-white {{#user.rolePremium}}bg-green-600{{/user.rolePremium}}{{^user.rolePremium}}bg-gray-500{{/user.rolePremium}}">
+                            {{user.role}}
+                        </span>
+                    </p>
+                    <p><span class="font-medium text-gray-600">Last Updated:</span> {{user.updated}}</p>
+
+                    <!-- 🔴 LOGOUT BUTTON -->
+                    <button
+                            id="spyne-logout-btn"
+                            class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+                    >
+                        Log Out
+                    </button>
+                </div>
+            {{/hasUser}}
+
+            {{^hasUser}}
+                <div class="text-gray-600">
+                    <p>No user is currently logged in.</p>
+                    <p class="mt-2">
+                        <a href="https://spynejs.com/login?callbackPort=52931"
+                           class="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                            Log in to SpyneJS
+                        </a>
+                    </p>
+                </div>
+            {{/hasUser}}
+        </section>
+
+        <!-- 🧩 Application List -->
+        <section class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="font-semibold text-lg text-blue-700 mb-4">Registered Spyne Applications</h3>
+
+            {{#registryList}}
+                <div class="border-b border-gray-200 py-4">
+                    <h4 class="font-semibold text-blue-600 break-all">{{dir}}</h4>
+                    <p><span class="font-medium">Host:</span> {{cmsHost}}</p>
+                    <p><span class="font-medium">Port:</span> {{cmsPort}}</p>
+                    <p><span class="font-medium">Last Updated:</span> {{updated}}</p>
+                </div>
+            {{/registryList}}
+
+            {{^registryList}}
+                <p class="text-gray-500">No registered Spyne applications found.</p>
+            {{/registryList}}
+        </section>
+
+        <!-- 🧾 Raw JSON Data -->
+        <section class="mt-8">
+            <h3 class="font-semibold mb-2 text-gray-700">Raw JSON Data</h3>
+            <pre class="bg-gray-900 text-green-300 text-sm rounded-md p-4 overflow-x-auto">{{data}}</pre>
+        </section>
+    </section>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logoutBtn = document.getElementById("spyne-logout-btn");
+        if (!logoutBtn) return;
+
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await fetch("/auth/clear", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                // Reload to show the logged-out state
+                window.location.reload();
+            } catch (err) {
+                console.error("Failed to logout:", err);
+                alert("Error logging out — check console.");
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>

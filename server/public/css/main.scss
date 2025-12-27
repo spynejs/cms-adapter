@@ -1,0 +1,36 @@
+@use "globals.scss" as globals;
+@use "palette.scss" as palette;
+@use "index/ui.scss";
+@use "index/header.scss";
+@use "index/snapshot-container.scss";
+@use "index/body.scss";
+
+
+body{
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:  palette.$Neutral-300;
+  font-family: "Nunito", sans-serif;
+
+  main#spyne-cms-main{
+    position: relative;
+    margin-top: globals.$headerHeight;
+    width: 100%;
+    height: 100%;
+    padding:0 .25rem;
+    max-width: globals.$mainMaxWidth;
+    min-height: calc(100vh - #{globals.$headerHeight});
+    background: palette.$Neutral-100;
+
+
+  }
+
+
+
+
+}

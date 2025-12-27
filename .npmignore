@@ -1,0 +1,20 @@
+# Node and build
+node_modules/
+.idea/
+dist/
+lib/
+
+# CMS snapshots (user-local)
+server/.snapshots/
+!server/.snapshots/.gitkeep
+
+# Tests and temp
+server-tests/
+*.log
+*.tmp
+*.lock
+*.zip
+*.tar.gz
+
+# Local configs
+nodemon.json
