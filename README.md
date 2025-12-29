@@ -1,4 +1,4 @@
-# @spyne/cms-adapter
+# @spynejs/cms-adapter
 
 The **SpyneJS CMS Adapter** connects the SpyneJS CMS **runtime** to a local development environment.
 
@@ -149,7 +149,7 @@ This is especially useful when developing applications that will later integrate
 
 ## Integration with the CMS runtime
 
-The CMS Adapter is consumed indirectly by the **`@spyne/cms`** runtime plugin.
+The CMS Adapter is consumed indirectly by the **`@spynejs/cms`** runtime plugin.
 
 The integration flow looks like this:
 
@@ -180,8 +180,8 @@ No manual setup is required.
 ## Typical development setup
 
 - SpyneJS application (Webpack)
-- `@spyne/cms` runtime plugin
-- `@spyne/cms-adapter` running locally
+- `@spynejs/cms` runtime plugin
+- `@spynejs/cms-adapter` running locally
 - JSON data stored in the application repository
 
 This setup enables:

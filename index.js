@@ -1,5 +1,5 @@
 /**
- * @spyne/cms-adapter
+ * @spynejs/cms-adapter
  *
  * Public adapter exports.
  * This file defines the supported CMS adapter implementations.

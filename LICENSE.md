@@ -78,7 +78,7 @@ subscription, or separate agreements.
 
 ## Development-Only Scope
 
-This package (`@spyne/cms-adapter`) is intended for **development-time use only**.
+This package (`@spynejs/cms-adapter`) is intended for **development-time use only**.
 
 It is not designed or licensed as a production content server.  
 Use in production environments may require a commercial license or separate agreement.
