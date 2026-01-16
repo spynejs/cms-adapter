@@ -1,6 +1,6 @@
 {
   "name": "@spynejs/cms-adapter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local development adapter for safe, deterministic JSON persistence for the SpyneJS CMS runtime",
   "keywords": [
     "spynejs",
