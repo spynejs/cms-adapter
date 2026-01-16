@@ -35,7 +35,7 @@ class SnapshotContainerEl {
     //cms.log('on submit btn clicked1 ',{selected},e);
     const onReturnedRevertMsg = (data)=>{
 
-      console.log('data is ',data);
+      //console.log('data is ',data);
     }
 
 

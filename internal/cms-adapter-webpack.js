@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const { ServerCMS } = require('../server/server-cms');
 const { findAvailablePort } = require('../server/src/utils/find-available-port');
 const SpyneRegistry  = require('../server/src/spyne-registry');
-const {checkToStartRegistryServer} = require("../server/server-spyne-registry-app");
+const {checkToStartRegistryServer, SpyneRegistryServerInfo} = require("../server/server-spyne-registry-app");
+const {startupFormatBlock} = require("../server/src/utils/format-logs");
 const getPortModule = require('get-port'); // or './path/to/your/module'
 const getPort = getPortModule.default || getPortModule;
 
@@ -45,7 +46,7 @@ module.exports = class SpyneCmsServerWebpackPlugin {
 
 
       const port = await getPort({port: portNumbers(this._requestedPort, this._requestedPortEnd)});
-      console.log("get port is ",getPort, {port});
+      //console.log("get port is ",getPort, {port});
 
       new webpack.DefinePlugin({
         CMS_HOST_SERVER: JSON.stringify(host),
@@ -56,20 +57,23 @@ module.exports = class SpyneCmsServerWebpackPlugin {
       const dataDirectory = compiler.options.resolve.alias.data;
       const serverOptions = { host, port, dataDirectory };
 
-      console.log('🟢 CMS Server Options', serverOptions);
 
       this._cmsServer = new ServerCMS(serverOptions);
-
+      let registry;
       // Start server only if not already running
       if (!this._cmsServer.isRunning) {
         await this._cmsServer.startServer();
         this._cmsServer.isRunning = true;
         await checkToStartRegistryServer();
-        const registry = new SpyneRegistry();
+        registry = new SpyneRegistry();
         registry.registerService(process.cwd(), 'localhost', port, 'cms');
       }
 
-    //
+      const {registryPort, registryHost} = SpyneRegistryServerInfo;
+      const serverData = {dataDirectory, host, port, registryPort, registryHost};
+      startupFormatBlock(serverData);
+      //console.log('🟢 CMS Server Options2', {serverOptions, port, SpyneRegistryServerInfo });
+
 
 
     });

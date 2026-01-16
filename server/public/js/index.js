@@ -6,7 +6,7 @@ const onDocumentReady = ()=>{
 
   const snapshotsContainers = document.querySelectorAll('.snapshot-container');
 
-  console.log('doc has loaded ',{snapshotsContainers});
+  //console.log('doc has loaded ',{snapshotsContainers});
 
   const addSnapshotContainerClass = (el) => {
     const controller = new SnapshotContainerEl(el);

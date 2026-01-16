@@ -67,7 +67,7 @@ class ServerApp{
   startServer(){
     this._server =  _app.listen(_port, _host, function(err){
       if (err) console.log(err);
-      console.log("Server listening on PORT", _port);
+      //console.log("Server listening on PORT", _port);
     });
     _app.get("/", this.appGetAdminPage);
     _app.get("/snapshot/:snapshotId", this.appGetSnapshotData);

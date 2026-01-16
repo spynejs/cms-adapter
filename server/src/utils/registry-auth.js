@@ -142,14 +142,14 @@ async function authCallbackHandler(req, res) {
   if (!token) return res.status(400).send("Missing token");
 
   try {
-    console.log("TOKEN RAW (first 120):", token.slice(0, 120));
+    //console.log("TOKEN RAW (first 120):", token.slice(0, 120));
 
     // --- Step 1: Clean and decode ---
     token = decodeURIComponent(token.trim());  // decode URL entities
     token = token.replace(/\s+/g, "+");        // restore '+' replaced by spaces
     token = token.replace(/^"+|"+$/g, "");     // remove stray quotes
 
-    console.log("Cleaned token length:", token.length);
+   //console.log("Cleaned token length:", token.length);
 
     // --- Step 2: Convert to buffer ---
     //const buf = Buffer.from(token, "base64");
@@ -157,15 +157,15 @@ async function authCallbackHandler(req, res) {
     const normalized = token.replace(/-/g, "+").replace(/_/g, "/");
     const pad = "===".slice((normalized.length + 3) % 4);
     const buf = Buffer.from(normalized + pad, "base64");
-    console.log("Normalized token (first 60):", normalized.slice(0, 60));
-    console.log("Magic bytes:", buf[0].toString(16), buf[1].toString(16));
+    //console.log("Normalized token (first 60):", normalized.slice(0, 60));
+    //console.log("Magic bytes:", buf[0].toString(16), buf[1].toString(16));
 
-    console.log("Buffer length:", buf.length);
-    console.log("Magic bytes:", buf[0].toString(16), buf[1].toString(16));
+    //console.log("Buffer length:", buf.length);
+    //console.log("Magic bytes:", buf[0].toString(16), buf[1].toString(16));
 
     // --- Step 3: Check gzip header ---
     if (buf[0] === 0x1f && buf[1] === 0x8b) {
-      console.log("🗜️ Detected gzip compression, decompressing...");
+      //console.log("🗜️ Detected gzip compression, decompressing...");
       try {
         token = zlib.gunzipSync(buf).toString("utf8");
       } catch (gzipErr) {
@@ -178,12 +178,12 @@ async function authCallbackHandler(req, res) {
     }
 
     // --- Step 4: Verify JWT ---
-    console.log("🔑 Fetching Spyne public key...");
+   //console.log("🔑 Fetching Spyne public key...");
     const pub = await getPublicKey();
 
-    console.log("🧩 Verifying token...");
+   //console.log("🧩 Verifying token...");
     const payload = jwt.verify(token, pub, { algorithms: ["RS256"] });
-    console.log("✅ Verified payload:", payload);
+   //console.log("✅ Verified payload:", payload);
 
     // --- Step 5: Validate payload ---
     if (!validatePayload(payload)) {
@@ -203,7 +203,7 @@ async function authCallbackHandler(req, res) {
       tokenExp: payload.exp || 0,
     });
 
-    console.log("💾 Registry user updated successfully.");
+   //console.log("💾 Registry user updated successfully.");
 
     // --- Step 7: Respond success ---
     return res.send(`

@@ -12,7 +12,7 @@ async function loadEDET() {
 
     const codeEncoded = registry.user?.edet;
     if (!codeEncoded) {
-      console.log("🧩 No EDET code stored in registry.");
+      //console.log("🧩 No EDET code stored in registry.");
       return;
     }
 
@@ -34,7 +34,7 @@ async function loadEDET() {
 
     if (enterpriseModule.exports?.DomElementTemplate) {
       cache[moduleId] = enterpriseModule;
-      console.log("✅ EDET loaded and swapped successfully.");
+      //console.log("✅ EDET loaded and swapped successfully.");
     }
   } catch (err) {
     console.error("❌ Failed to load EDET:", err);

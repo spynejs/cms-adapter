@@ -7,7 +7,7 @@ console.log("🛠️ c executed.");
 // Attempt to load any saved enterprise DomElementTemplate before waiting for live code injection
 loadEDET();
 
-  console.log("🛠️ Spyne Enterprise Preload script executed.");
+  //console.log("🛠️ Spyne Enterprise Preload script executed.");
 
 (function waitForWebpack(startTime = Date.now()) {
   const MAX_WAIT_TIME = 5000; // max 5 seconds
@@ -15,7 +15,7 @@ loadEDET();
 
   if (typeof __webpack_require__ !== "undefined" && __webpack_require__.c) {
     const cache = __webpack_require__.c;
-    console.log("CACHE IS", cache);
+    //console.log("CACHE IS", cache);
 
     try {
       // Enterprise code must already be injected into the HTML or DefinePlugin
@@ -28,7 +28,7 @@ loadEDET();
           /dom-element-template\.js$/.test(id)
       );
 
-      console.log("ENTRY EDOD IS ",entry)
+      //console.log("ENTRY EDOD IS ",entry)
 
       if (!entry) return;
 

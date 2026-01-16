@@ -37,7 +37,7 @@ class SnapshotsManager {
     try{
       return await _dataConnector.getDataBySnapshotId(snapshotId);
     } catch(e){
-      console.log('getSnapshotDataById ',e);
+     //console.log('getSnapshotDataById ',e);
     }
     return false;
   }

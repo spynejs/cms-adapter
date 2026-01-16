@@ -23,11 +23,15 @@ const { verifySpyneAuthToken } = require('./src/utils/server-spyne-auth-verify')
 
 const DEFAULT_HOST = 'localhost';
 const DEFAULT_PORT = 52931;
+let _registryPort = DEFAULT_PORT;
+let _registryHost = DEFAULT_HOST;
 
 class ServerSpyneRegistryApp {
   constructor(serverOptions = {}, autoStart = false) {
     this.host = serverOptions.host || DEFAULT_HOST;
     this.port = serverOptions.port || DEFAULT_PORT;
+    _registryHost = this.host;
+    _registryPort = this.port;
     this.app = express();
     this.registry = new SpyneRegistry();
 
@@ -108,7 +112,7 @@ class ServerSpyneRegistryApp {
       if (err) {
         console.error('❌ Failed to start Spyne Registry:', err);
       } else {
-        console.log(`🧩 Spyne Registry listening at http://${this.host}:${this.port}`);
+        //console.log(`🧩 Spyne Registry listening at http://${this.host}:${this.port}`);
       }
     });
   }
@@ -148,7 +152,7 @@ class ServerSpyneRegistryApp {
       registry.user.updated = Date.now();
 
       fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), { mode: 0o600 });
-      console.log("🧩 Test EDET setup complete.");
+     // console.log("🧩 Test EDET setup complete.");
 
       return res.json({
         ok: true,
@@ -181,7 +185,7 @@ class ServerSpyneRegistryApp {
         const gzippedBuffer = Buffer.from(edet, 'base64');
         // Try gunzip
         decodedEdet = zlib.gunzipSync(gzippedBuffer).toString('utf8');
-        console.log("🗜️ EDET gzip decompression succeeded.");
+        //console.log("🗜️ EDET gzip decompression succeeded.");
       } catch (gzipErr) {
         // If gunzip fails, fallback to normal base64
         try {
@@ -201,7 +205,7 @@ class ServerSpyneRegistryApp {
 
       fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), { mode: 0o600 });
 
-      console.log("💾 Added or updated EDET in registry.");
+      //console.log("💾 Added or updated EDET in registry.");
       return res.json({ ok: true, message: "EDET added or updated." });
     } catch (err) {
       console.error("❌ Failed to add EDET:", err.message);
@@ -227,7 +231,7 @@ class ServerSpyneRegistryApp {
         delete registry.user.edet;
         registry.user.updated = Date.now();
         fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), { mode: 0o600 });
-        console.log("🧹 Removed EDET from registry.");
+        //console.log("🧹 Removed EDET from registry.");
         return res.json({ ok: true, message: "EDET removed from registry." });
       }
 
@@ -252,7 +256,7 @@ class ServerSpyneRegistryApp {
         const compressed = Buffer.from(token, "base64");
         const uncompressed = zlib.gunzipSync(compressed).toString("utf8");
         token = uncompressed; // replace with real JWT
-        console.log("🗜️ Token successfully decompressed.");
+        //console.log("🗜️ Token successfully decompressed.");
       } catch (gzipErr) {
         console.log("⚠️ Token not gzipped or already plain JWT — skipping gunzip.");
       }
@@ -416,7 +420,7 @@ class ServerSpyneRegistryApp {
         user: userInfo,
       };
 
-      console.log("📦 Registry lookup response:", response);
+      //console.log("📦 Registry lookup response:", response);
       return res.json(response);
     } catch (err) {
       console.error("❌ Failed to process /registry/lookup:", err.message);
@@ -459,7 +463,7 @@ class ServerSpyneRegistryApp {
       delete registry.user;
 
       fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), { mode: 0o600 });
-      console.log('🧹 Cleared user authentication info from registry.');
+      console.log('CMS:adapter: Cleared user authentication info from registry.');
       res.json({ ok: true, message: 'User authentication cleared.' });
     } catch (err) {
       console.error('❌ Failed to clear user auth:', err.message);
@@ -499,7 +503,7 @@ class ServerSpyneRegistryApp {
 
       fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), { mode: 0o600 });
 
-      console.log('🧹 Cleared user premium role (set to free).');
+      //console.log('🧹 Cleared user premium role (set to free).');
       return res.json({ ok: true, message: 'User premium role downgraded to free.' });
 
     } catch (err) {
@@ -527,12 +531,12 @@ const checkToStartRegistryServer = async (port = DEFAULT_PORT, host = DEFAULT_HO
 
     const onConnected = () => {
       socket.destroy();
-      console.log(`🧩 Spyne Registry already running at http://${host}:${port}`);
+      //console.log(`🧩 Spyne Registry already running at http://${host}:${port}`);
       resolve(true);
     };
 
     const onError = () => {
-      console.log('🧩 No active Spyne Registry found, starting in current process...');
+     //console.log('🧩 No active Spyne Registry found, starting in current process...');
       const server = new ServerSpyneRegistryApp({ host, port });
       server.startServer();
       resolve(true);
@@ -546,7 +550,13 @@ const checkToStartRegistryServer = async (port = DEFAULT_PORT, host = DEFAULT_HO
   });
 };
 
-module.exports = { ServerSpyneRegistryApp, checkToStartRegistryServer };
+const SpyneRegistryServerInfo = {
+  registryHost : _registryHost,
+  registerPort : _registryPort
+
+}
+
+module.exports = { ServerSpyneRegistryApp, checkToStartRegistryServer, SpyneRegistryServerInfo };
 
 // ------------------------------------------
 // CLI start (if this file is executed directly)

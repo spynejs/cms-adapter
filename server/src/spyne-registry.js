@@ -54,7 +54,7 @@ class SpyneRegistry {
 
   _writeRegistryFile() {
     try {
-      console.log("writing registry is ",this.registry);
+      //console.log("writing registry is ",this.registry);
       fs.writeFileSync(this.filePath, JSON.stringify(this.registry, null, 2));
     } catch (err) {
       console.warn('⚠️ Could not write registry file:', err.message);
@@ -113,7 +113,7 @@ class SpyneRegistry {
     this.registry[dir] = existing;
     this._writeRegistryFile();
 
-    console.log(`🧩 Registered ${type} server for ${dir} → ${host}:${port}`);
+    //console.log(`🧩 Registered ${type} server for ${dir} → ${host}:${port}`);
   }
 
   /**
